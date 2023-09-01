@@ -43,7 +43,7 @@
         </div>
 
 
-        <input type="hidden" class="form-control" name="userSeq" id="userSeq" value="<% out.println(userSeq); %>">
+        <input type="text" class="form-control" name="userSeq" id="userSeq" value="<% out.println(userSeq); %>">
 
         <button type="submit" class="btn btn-outline-primary">저장</button>
     </form>

@@ -17,33 +17,13 @@
           crossorigin="anonymous">
     <title>Title</title>
 
-<script>
-    function changeFn(){
-        var selectbox  = document.getElementById("selectbox");
-        var value = (selectbox.options[selectbox.selectedIndex].value);
-
-        var role = "${roleuser}";
-        var url = "/storeList/";
-
-        if(role == "client"){
-            url = url+"roleuser=client&sort=";
-        } else {
-            url = url+"roleuser=manager&sort=";
-        }
-        location.href = url+value;
-
-    };
-
-</script>
 
 </head>
 <body>
 <div class="container">
     <h2>상점 목록</h2>
 
-
     <form name="formSearch" id="formSearch" action="/storeDetail" method="post">
-<h1>${roleuser}</h1>
         <input type="hidden" id="roleuser" name="roleuser" value=${roleuser} />
         <div class="input-group mb-3">
                 <input type="text" class="form-control" placeholder="매장명" id="schStrName" name="schStrName" >
@@ -51,15 +31,6 @@
         </div>
     </form>
 
-    <div style="padding-bottom: 5px;">
-        <span>Sort by </span>
-        <select class="form-select" aria-label="Default select example" onchange="changeFn()" id="selectbox">
-            <option selected>디폴트: 매장등록순</option>
-            <option value="storeName">매장명</option>
-            <option value="storeStar">별점</option>
-            <option value="storePlace">위치</option>
-        </select>
-    </div>
 
 
     <table class="table table-striped table-hover">
@@ -68,19 +39,15 @@
                 <th scope="col">#</th>
                 <th scope="col">매장명</th>
                 <th scope="col">상점위치</th>
-                <th scope="col">별점</th>
             </tr>
         </thead>
         <tbody>
             <c:forEach var="st" items="${list}">
                 <tr>
-
                     <td><c:out value="${st.id}"/></td>
-
                     <td><a href='/storeDetail/id=${st.id}&roleuser=${roleuser}'><c:out value="${st.name}"/></a></td>
-
                     <td><c:out value="${st.place}"/></td>
-                    <td><c:out value="${st.star}"/></td>
+
                 </tr>
             </c:forEach>
     </table>

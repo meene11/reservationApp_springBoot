@@ -5,13 +5,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import zerobase.reservation.DTO.StoreListDto;
 import zerobase.reservation.Domain.Store;
 import zerobase.reservation.Service.StoreService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 public class StoreController {
@@ -48,12 +47,21 @@ public class StoreController {
 
         storeService.storeInsert(str);
 
-        List<Store> list = storeService.storeList();
+        // sortby 없음
+//        List<Store> list = storeService.storeList();
+
+        // sortby
+        List<StoreListDto> list = storeService.getJoinInfo();
+
         model.addAttribute("list", list);
+        model.addAttribute("roleuser", "manager");
+
+
 
         return "storeList";
     }
-
+/*
+// sortBy 없는 version 0.1
     // 상점 목록
     @GetMapping("/storeList")
     public String storeList(Model model) {
@@ -71,7 +79,32 @@ public class StoreController {
 
         return "storeList";
     }
+    //
+*/
+//
 
+
+    // // 상점 목록 by 예약자
+    @GetMapping("/storeList/roleuser={roleuser}&sort={sort}")
+    public String storeList(Model model, @PathVariable("roleuser") String roleuser, @PathVariable("sort") String sort) {
+        List<StoreListDto> list = null;
+        if(sort == null){
+            list = storeService.getJoinInfo();
+        } else if(sort.equals("storeName")){ //이름순
+            list = storeService.getJoinStarInfo();
+        } else if(sort.equals("storeStar")){ //별점
+            list = storeService.getJoinNameInfo();
+        } else if (sort.equals("storePlace")) { // 위치
+            list = storeService.getJoinPlaceInfo();
+        } else {
+            list = storeService.getJoinInfo();
+        }
+        model.addAttribute("list", list);
+        model.addAttribute("roleuser", roleuser);
+        System.out.println(" 롤 : " + roleuser);
+
+        return "storeList";
+    }
 
     // 상점 디테일 by Id
     @GetMapping("/storeDetail/id={id}&roleuser={roleuser}")
@@ -104,6 +137,49 @@ public class StoreController {
 
         return "storeDetail";
     }
+
+    //
+    // 상점 목록
+    @GetMapping("/storeListJoin")
+    public String storeListJoin(Model model) {
+        List<StoreListDto> list = storeService.getJoinInfo();
+
+
+        for(StoreListDto dt: list){
+            Integer star = dt.getStar();
+            System.out.println("컨트 별점: " +  star);
+
+        }
+
+
+
+        model.addAttribute("list", list);
+        return "storeList";
+    }
+
+    @GetMapping("/storeListJoin1")
+    public String getJoinStarInfo(Model model) {
+        List<StoreListDto> list = storeService.getJoinStarInfo();
+        model.addAttribute("list", list);
+        return "storeList";
+    }
+
+    @GetMapping("/storeListJoin2")
+    public String getJoinNameInfo(Model model) {
+        List<StoreListDto> list = storeService.getJoinNameInfo();
+        model.addAttribute("list", list);
+        return "storeList";
+    }
+
+    @GetMapping("/storeListJoin3")
+    public String getJoinPlaceInfo(Model model) {
+        List<StoreListDto> list = storeService.getJoinPlaceInfo();
+        model.addAttribute("list", list);
+        return "storeList";
+    }
+
+
+
 
 
 }

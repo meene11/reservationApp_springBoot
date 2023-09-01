@@ -40,7 +40,7 @@
         <h3>매장관리자 메뉴</h3>
         <br/>
         <p> <a href="/store" class="route-link">매장등록</a></p>
-        <p> <a href="/storeList/manager" class="route-link">매장리스트</a></p>
+        <p> <a href="/storeList/roleuser=manager&sort=" class="route-link">매장리스트</a></p>
 
 
         <p> <a href="/frMngBkList/${seq}" class="route-link">예약정보리스트</a></p>
@@ -52,7 +52,7 @@
     <c:if test="${member.roleuser eq 'client'}">
         <h3>매장이용자 메뉴</h3>
         <br/>
-        <p> <a href="/storeList/client" class="route-link">매장리스트(예약)</a></p>
+        <p> <a href="/storeList/roleuser=client&sort=" class="route-link">매장리스트(예약)</a></p>
         <p> <a href="/reviewList" class="route-link">리뷰리스트(리뷰)</a></p>
     </c:if>
 </div>

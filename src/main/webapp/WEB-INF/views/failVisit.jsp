@@ -14,7 +14,7 @@
 
 <div class="container">
     <h3 class="display-4">방문확정 실패하였습니다. <br>다시 예약해주세요</h3>
-    <a href="student/showForm" class="route-link">Going into HOme</a>
+    <a href="/" class="route-link">Going into Home</a>
 </div>
 
 

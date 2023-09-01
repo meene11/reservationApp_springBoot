@@ -46,16 +46,18 @@
                     예약
                 </button>
 
-                <button type="button" class="btn btn-secondary btn-sm" onclick="location.href='/storeList/${roleuser}'">
+                <button type="button" class="btn btn-secondary btn-sm" onclick="location.href='/storeList/roleuser=${roleuser}&sort='">
                     목록
                 </button>
+
             </c:if>
 
-
             <c:if test="${roleuser ne 'client'}">
-                <button type="button" class="btn btn-secondary btn-sm" onclick="location.href='/storeList'">
+
+                <button type="button" class="btn btn-secondary btn-sm" onclick="location.href='/storeList/roleuser=${roleuser}&sort='">
                     목록
                 </button>
+
             </c:if>
 
         </div>
