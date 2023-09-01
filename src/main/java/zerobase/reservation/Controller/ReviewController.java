@@ -43,13 +43,6 @@ public class ReviewController {
 
         System.out.println(" 리뷰 contorller~~~~ ");
 
-        System.out.println("  userid "   +  userid ) ;
-        System.out.println("  storeName "   +  storeName ) ;
-        System.out.println("  star "   +  star ) ;
-        System.out.println("  title "   +  title ) ;
-        System.out.println("  article "   +  article ) ;
-        System.out.println("  storeId "   +  storeId ) ;
-        System.out.println("  visitConfirm "   +  visitConfirm ) ;
 
         Review rv = new Review();
         rv.setUserid(userid);
